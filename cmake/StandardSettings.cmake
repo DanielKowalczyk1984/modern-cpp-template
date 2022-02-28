@@ -2,9 +2,14 @@
 # Project settings
 #
 
-option(${PROJECT_NAME}_BUILD_EXECUTABLE "Build the project as an executable, rather than a library." ON)
+option(${PROJECT_NAME}_BUILD_EXECUTABLE
+       "Build the project as an executable, rather than a library." ON
+)
 option(${PROJECT_NAME}_BUILD_HEADERS_ONLY "Build the project as a header-only library." OFF)
-option(${PROJECT_NAME}_USE_ALT_NAMES "Use alternative names for the project, such as naming the include directory all lowercase." ON)
+option(${PROJECT_NAME}_USE_ALT_NAMES
+       "Use alternative names for the project, such as naming the include directory all lowercase."
+       ON
+)
 
 #
 # Compiler options
@@ -25,10 +30,14 @@ option(${PROJECT_NAME}_ENABLE_VCPKG "Enable the Vcpkg package manager for this p
 #
 # Currently supporting: GoogleTest, Catch2.
 
-option(${PROJECT_NAME}_ENABLE_UNIT_TESTING "Enable unit tests for the projects (from the `test` subfolder)." OFF)
+option(${PROJECT_NAME}_ENABLE_UNIT_TESTING
+       "Enable unit tests for the projects (from the `test` subfolder)." OFF
+)
 
 option(${PROJECT_NAME}_USE_GTEST "Use the GoogleTest project for creating unit tests." OFF)
-option(${PROJECT_NAME}_USE_GOOGLE_MOCK "Use the GoogleMock project for extending the unit tests." OFF)
+option(${PROJECT_NAME}_USE_GOOGLE_MOCK "Use the GoogleMock project for extending the unit tests."
+       OFF
+)
 
 option(${PROJECT_NAME}_USE_CATCH2 "Use the Catch2 project for creating unit tests." OFF)
 
@@ -59,8 +68,12 @@ option(${PROJECT_NAME}_ENABLE_DOXYGEN "Enable Doxygen documentation builds of so
 # Generate compile_commands.json for clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(${PROJECT_NAME}_VERBOSE_OUTPUT "Enable verbose output, allowing for a better understanding of each step taken." ON)
-option(${PROJECT_NAME}_GENERATE_EXPORT_HEADER "Create a `project_export.h` file containing all exported symbols." OFF)
+option(${PROJECT_NAME}_VERBOSE_OUTPUT
+       "Enable verbose output, allowing for a better understanding of each step taken." ON
+)
+option(${PROJECT_NAME}_GENERATE_EXPORT_HEADER
+       "Create a `project_export.h` file containing all exported symbols." OFF
+)
 
 # Export all symbols when building a shared library
 if(BUILD_SHARED_LIBS)
@@ -69,7 +82,9 @@ if(BUILD_SHARED_LIBS)
   set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 endif()
 
-option(${PROJECT_NAME}_ENABLE_LTO "Enable Interprocedural Optimization, aka Link Time Optimization (LTO)." OFF)
+option(${PROJECT_NAME}_ENABLE_LTO
+       "Enable Interprocedural Optimization, aka Link Time Optimization (LTO)." OFF
+)
 if(${PROJECT_NAME}_ENABLE_LTO)
   include(CheckIPOSupported)
   check_ipo_supported(RESULT result OUTPUT output)
@@ -80,8 +95,9 @@ if(${PROJECT_NAME}_ENABLE_LTO)
   endif()
 endif()
 
-
-option(${PROJECT_NAME}_ENABLE_CCACHE "Enable the usage of Ccache, in order to speed up rebuild times." ON)
+option(${PROJECT_NAME}_ENABLE_CCACHE
+       "Enable the usage of Ccache, in order to speed up rebuild times." ON
+)
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)

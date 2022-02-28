@@ -1,5 +1,6 @@
-#include "project/tmp.hpp"
 #include <fmt/core.h>
+
+#include "project/tmp.hpp"
 
 int main(int argc, char const *argv[])
 {

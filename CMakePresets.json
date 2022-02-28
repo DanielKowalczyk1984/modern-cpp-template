@@ -5,7 +5,9 @@
             "name": "vcpkg-ninja-config",
             "hidden": true,
             "generator": "Ninja",
-            "environment": {"VCPKG_ROOT": "${HOME}/Code/vcpkg"},
+            "environment": {
+                "VCPKG_ROOT": "${HOME}/Code/vcpkg"
+            },
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/${presetName}",
@@ -13,14 +15,28 @@
             }
         },
         {
-            "name": "windows64-msvc-2022",
-            "displayName": "Visual Studio Community 2022 - amd64",
-            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
-            "inherits":["vcpkg-ninja-config"],
+            "name": "conf-windows-common",
+            "description": "Windows settings for MSBuild toolchain that apply to msvc and clang",
+            "hidden": true,
+            "inherits": [
+                "vcpkg-ninja-config"
+            ],
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
             },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "windows64-msvc-2022",
+            "displayName": "Visual Studio Community 2022 - amd64",
+            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+            "inherits": [
+                "conf-windows-common"
+            ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_COMPILER": "cl",
@@ -31,11 +47,9 @@
             "name": "windows64-msvc-2022-release",
             "displayName": "Visual Studio Community 2022 - amd64 - Release",
             "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
-            "inherits":["vcpkg-ninja-config"],
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
+            "inherits": [
+                "conf-windows-common"
+            ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_CXX_COMPILER": "cl",
@@ -46,7 +60,9 @@
             "name": "gcc-11-debug",
             "displayName": "GCC 11.1.0 - Debug",
             "description": "Using compilers: C = /bin/x86_64-linux-gnu-gcc-11, CXX = /bin/x86_64-linux-gnu-g++-11 with Ninja",
-            "inherits":["vcpkg-ninja-config"],
+            "inherits": [
+                "vcpkg-ninja-config"
+            ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_C_COMPILER": "gcc-11",
@@ -57,7 +73,9 @@
             "name": "gcc-11-release",
             "displayName": "GCC 11.1.0 - Release",
             "description": "Using compilers: C = /bin/x86_64-linux-gnu-gcc-11, CXX = /bin/x86_64-linux-gnu-g++-11 with Ninja",
-            "inherits":["vcpkg-ninja-config"],
+            "inherits": [
+                "vcpkg-ninja-config"
+            ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_C_COMPILER": "gcc-11",
