@@ -1,0 +1,100 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "vcpkg-ninja-config",
+            "hidden": true,
+            "generator": "Ninja",
+            "environment": {"VCPKG_ROOT": "${HOME}/Code/vcpkg"},
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/${presetName}",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            }
+        },
+        {
+            "name": "windows64-msvc-2022",
+            "displayName": "Visual Studio Community 2022 - amd64",
+            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+            "inherits":["vcpkg-ninja-config"],
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "cl",
+                "CMAKE_C_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "windows64-msvc-2022-release",
+            "displayName": "Visual Studio Community 2022 - amd64 - Release",
+            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+            "inherits":["vcpkg-ninja-config"],
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "cl",
+                "CMAKE_C_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "gcc-11-debug",
+            "displayName": "GCC 11.1.0 - Debug",
+            "description": "Using compilers: C = /bin/x86_64-linux-gnu-gcc-11, CXX = /bin/x86_64-linux-gnu-g++-11 with Ninja",
+            "inherits":["vcpkg-ninja-config"],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "gcc-11",
+                "CMAKE_CXX_COMPILER": "g++-11"
+            }
+        },
+        {
+            "name": "gcc-11-release",
+            "displayName": "GCC 11.1.0 - Release",
+            "description": "Using compilers: C = /bin/x86_64-linux-gnu-gcc-11, CXX = /bin/x86_64-linux-gnu-g++-11 with Ninja",
+            "inherits":["vcpkg-ninja-config"],
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "gcc-11",
+                "CMAKE_CXX_COMPILER": "g++-11"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build-windows64-debug",
+            "configuration": "Debug",
+            "jobs": 4,
+            "description": "",
+            "displayName": "",
+            "configurePreset": "windows64-msvc-2022"
+        },
+        {
+            "name": "build-windows64-release",
+            "configuration": "Release",
+            "jobs": 4,
+            "description": "",
+            "displayName": "",
+            "configurePreset": "windows64-msvc-2022-release"
+        },
+        {
+            "name": "build-gcc-11-debug",
+            "jobs": 4,
+            "description": "",
+            "displayName": "",
+            "configurePreset": "gcc-11-debug"
+        },
+        {
+            "name": "build-gcc-11-release",
+            "jobs": 4,
+            "description": "",
+            "displayName": "",
+            "configurePreset": "gcc-11-release"
+        }
+    ]
+}
